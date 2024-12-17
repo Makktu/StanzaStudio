@@ -1,0 +1,286 @@
+:root[data-theme="light"] {
+    --bg-color: #f5f5f5;
+    --text-color: #333;
+    --card-bg: white;
+    --input-bg: white;
+    --border-color: #ddd;
+    --button-bg: #007AFF;
+    --button-hover: #0056b3;
+    --copy-button-bg: #f0f0f0;
+    --copy-button-hover: #e0e0e0;
+    --shadow-color: rgba(0,0,0,0.1);
+}
+
+:root[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --card-bg: #2d2d2d;
+    --input-bg: #2d2d2d;
+    --border-color: #404040;
+    --button-bg: #0A84FF;
+    --button-hover: #409CFF;
+    --copy-button-bg: #404040;
+    --copy-button-hover: #505050;
+    --shadow-color: rgba(0,0,0,0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    transition: background-color 0.3s;
+}
+
+.theme-toggle:hover {
+    background: var(--copy-button-hover);
+}
+
+.theme-toggle svg {
+    color: var(--text-color);
+}
+
+.sun-icon {
+    display: none;
+}
+
+[data-theme="dark"] .sun-icon {
+    display: block;
+}
+
+[data-theme="dark"] .moon-icon {
+    display: none;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    padding-bottom: 100px;
+    margin-top: 40px;
+}
+
+.poem-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    animation: fadeIn 0.3s ease-in;
+    border: 1px solid var(--border-color);
+}
+
+.poem-content {
+    white-space: pre-wrap;
+    margin-bottom: 15px;
+}
+
+.copy-button {
+    background: var(--copy-button-bg);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+    color: var(--text-color);
+}
+
+.copy-button:hover {
+    background: var(--copy-button-hover);
+}
+
+.input-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--input-bg);
+    padding: 20px;
+    box-shadow: 0 -2px 10px var(--shadow-color);
+    border-top: 1px solid var(--border-color);
+}
+
+.input-container form {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+}
+
+textarea {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    resize: none;
+    font-family: inherit;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: var(--input-bg);
+    color: var(--text-color);
+}
+
+textarea:focus {
+    border-color: var(--button-bg);
+}
+
+button[type="submit"] {
+    background: var(--button-bg);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+    background: var(--button-hover);
+}
+
+.logo-container {
+    position: fixed;
+    z-index: 1000;
+    transition: all 0.5s ease-in-out;
+}
+
+.logo {
+    transition: all 0.5s ease-in-out;
+}
+
+.logo.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    max-width: 400px;
+}
+
+.logo.centered.keyboard-visible {
+    width: 40%;
+    max-width: 200px;
+    top: 15%;
+    transform: translate(-50%, 0);
+    opacity: 0.9;
+    transition: all 0.3s ease-in-out;
+}
+
+.logo.top-left {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 150px;
+    transform: none;
+}
+
+.logo.top-left.keyboard-visible {
+    transform: scale(0.7);
+    top: 5px;
+    opacity: 0.8;
+    transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .chat-container {
+        padding: 10px;
+        padding-bottom: 90px;
+    }
+    
+    .poem-card {
+        padding: 15px;
+    }
+    
+    .input-container {
+        padding: 10px;
+    }
+    
+    textarea {
+        font-size: 16px; /* Prevents zoom on iOS */
+        padding: 8px;
+    }
+    
+    button[type="submit"] {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+        width: 36px;
+        height: 36px;
+    }
+    
+    .logo.centered {
+        width: 80%;
+        max-width: 300px;
+    }
+    
+    .logo.top-left {
+        width: 80px;
+        top: 0;
+        left: 0;
+        padding: 5px;
+    }
+    
+    .logo.top-left.keyboard-visible {
+        transform: scale(0.8);
+        opacity: 0.7;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
